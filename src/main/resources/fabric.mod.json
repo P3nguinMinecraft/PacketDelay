@@ -5,6 +5,7 @@
 	"name": "Packet Delay",
 	"description": "Simple mod that delays packets",
 	"authors": [
+        "P3nguinMinecraft"
 		],
 	"contact": {
 	},
@@ -16,7 +17,7 @@
 
         ],
 		"client": [
-			"com.packetdelay.PacketDelay"
+            "io.github.penguin.packetdelay.PacketDelay"
 		]
 	},
 	"mixins": [
@@ -24,7 +25,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=${loader_version}",
-		"minecraft": ">=${minecraft_version}",
+		"minecraft": ">=1.21 <1.21.2",
 		"java": ">=21",
 		"fabric-api": "*"
 	},
