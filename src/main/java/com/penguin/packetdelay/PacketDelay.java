@@ -3,7 +3,7 @@ package com.penguin.packetdelay;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.gui.Font;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -26,8 +26,9 @@ public class PacketDelay implements ClientModInitializer {
             if (!isDelayingPackets()) releasePackets(client);
         });
         HudRenderCallback.EVENT.register((guiGraphics, deltaTracker) -> {
-            if (isDelayingPackets())
-                Minecraft.getInstance().font.drawInBatch("Delaying Packets", 4, guiGraphics.guiWidth() - 4 - Minecraft.getInstance().font.lineHeight, 0xffffffff, true, guiGraphics.pose().last().pose(), guiGraphics.bufferSource(), Font.DisplayMode.NORMAL, 0x00000000, 1);
+            if (isDelayingPackets()) {
+                guiGraphics.drawString(Minecraft.getInstance().font, "Delaying Packets", 4, guiGraphics.guiHeight() - 4 - Minecraft.getInstance().font.lineHeight, 0xFFFFFFFF);
+            }
         });
     }
 
