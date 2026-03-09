@@ -1,6 +1,6 @@
-package com.packetdelay.mixin;
+package io.github.penguin.packetdelay.mixin;
 
-import com.packetdelay.PacketDelay;
+import io.github.penguin.packetdelay.PacketDelay;
 import net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl;
 import net.minecraft.network.protocol.Packet;
 import org.spongepowered.asm.mixin.Mixin;
