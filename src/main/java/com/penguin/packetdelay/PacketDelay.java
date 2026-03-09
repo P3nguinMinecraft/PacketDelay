@@ -3,7 +3,6 @@ package com.penguin.packetdelay;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.KeyMapping;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -39,7 +38,7 @@ public class PacketDelay implements ClientModInitializer {
             ServerboundPlayerInputPacket.class,
             ServerboundUseItemOnPacket.class,
             ServerboundUseItemPacket.class,
-            ClientboundSetCarriedItemPacket.class,
+            ClientboundSetHeldSlotPacket.class,
             ServerboundInteractPacket.class
     };
 
