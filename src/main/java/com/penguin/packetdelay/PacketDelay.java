@@ -1,4 +1,4 @@
-package com.packetdelay;
+package com.penguin.packetdelay;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.KeyMapping;

@@ -5,6 +5,7 @@
 	"name": "Packet Delay",
 	"description": "Simple mod that delays packets",
 	"authors": [
+        "P3nguinMinecraft"
 		],
 	"contact": {
 	},
@@ -16,7 +17,7 @@
 
         ],
 		"client": [
-			"com.packetdelay.PacketDelay"
+            "com.penguin.packetdelay.PacketDelay"
 		]
 	},
 	"mixins": [

@@ -7,7 +7,7 @@
     },
     "verbose": true,
     "client": [
-        "ConnectionMixin",
-        "ClientCommonPacketListenerImplMixin"
+        "com.penguin.packetdelay.mixin.ConnectionMixin",
+        "com.penguin.packetdelay.mixin.ClientCommonPacketListenerImplMixin"
     ]
 }
