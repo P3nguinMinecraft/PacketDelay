@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "package": "com.packetdelay.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "verbose": true,
+    "client": [
+        "ConnectionMixin",
+        "ClientCommonPacketListenerImplMixin"
+    ]
+}
