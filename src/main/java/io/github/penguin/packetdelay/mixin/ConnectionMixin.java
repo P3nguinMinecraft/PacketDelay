@@ -1,6 +1,6 @@
-package com.packetdelay.mixin;
+package io.github.penguin.packetdelay.mixin;
 
-import com.packetdelay.PacketDelay;
+import io.github.penguin.packetdelay.PacketDelay;
 import net.minecraft.network.Connection;
 import net.minecraft.network.DisconnectionDetails;
 import org.spongepowered.asm.mixin.Mixin;

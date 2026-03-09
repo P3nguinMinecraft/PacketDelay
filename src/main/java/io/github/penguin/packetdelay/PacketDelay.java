@@ -1,6 +1,7 @@
-package com.packetdelay;
+package io.github.penguin.packetdelay;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.KeyMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +27,15 @@ public class PacketDelay implements ClientModInitializer {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
             if (!isDelayingPackets()) releasePackets(client);
         });
-        HudElementRegistry.attachElementAfter(ResourceLocation.parse("subtitles"), ResourceLocation.fromNamespaceAndPath("packetdelay", "packet-delay-text-layer"), (guiGraphics, deltaTicks) -> {
-            if (isDelayingPackets()) {
-                guiGraphics.drawString(Minecraft.getInstance().font, "Delaying Packets", 4, guiGraphics.guiWidth() - 4 - Minecraft.getInstance().font.lineHeight, 0xffffffff, false);
-            }
-        });
+        HudElementRegistry.attachElementBefore(
+                VanillaHudElements.CHAT,
+                ResourceLocation.fromNamespaceAndPath("packetdelay", "text_overlay"),
+                (guiGraphics, deltaTracker) -> {
+                    if (isDelayingPackets()) {
+                        guiGraphics.drawString(Minecraft.getInstance().font, "Delaying Packets", 4, guiGraphics.guiHeight() - 4 - Minecraft.getInstance().font.lineHeight, 0xFFFFFFFF);
+                    }
+                }
+        );
     }
 
     private static final ArrayList<Packet<?>> delayedPackets = new ArrayList<>();
