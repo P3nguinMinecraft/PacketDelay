@@ -1,4 +1,4 @@
-package com.packetdelay;
+package io.github.penguin.packetdelay;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.KeyMapping;
@@ -12,13 +12,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.Packet;
 
 import 	net.minecraft.network.protocol.game.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 
 public class PacketDelay implements ClientModInitializer {
 	public static Logger LOGGER = LoggerFactory.getLogger("PacketDelay");
-    public static KeyMapping.Category CATEGORY = KeyMapping.Category.register(ResourceLocation.parse("packetdelay"));
+    public static KeyMapping.Category CATEGORY = KeyMapping.Category.register(Identifier.parse("packetdelay"));
     private static KeyMapping activateKey;
     @Override
     public void onInitializeClient() {
@@ -26,7 +26,7 @@ public class PacketDelay implements ClientModInitializer {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
             if (!isDelayingPackets()) releasePackets(client);
         });
-        HudElementRegistry.attachElementAfter(ResourceLocation.parse("subtitles"), ResourceLocation.fromNamespaceAndPath("packetdelay", "packet-delay-text-layer"), (guiGraphics, deltaTicks) -> {
+        HudElementRegistry.attachElementAfter(Identifier.parse("subtitles"), Identifier.fromNamespaceAndPath("packetdelay", "packet-delay-text-layer"), (guiGraphics, deltaTicks) -> {
             if (isDelayingPackets()) {
                 guiGraphics.drawString(Minecraft.getInstance().font, "Delaying Packets", 4, guiGraphics.guiWidth() - 4 - Minecraft.getInstance().font.lineHeight, 0xffffffff, false);
             }
