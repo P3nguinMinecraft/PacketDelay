@@ -1,17 +1,18 @@
 package io.github.penguin.packetdelay;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.KeyMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.Packet;
 
-import 	net.minecraft.network.protocol.game.*;
+import net.minecraft.network.protocol.game.*;
 import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
@@ -22,15 +23,19 @@ public class PacketDelay implements ClientModInitializer {
     private static KeyMapping activateKey;
     @Override
     public void onInitializeClient() {
-        activateKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.packetdelay", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY));
+        activateKey = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.packetdelay", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), CATEGORY));
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
             if (!isDelayingPackets()) releasePackets(client);
         });
-        HudElementRegistry.attachElementAfter(Identifier.parse("subtitles"), Identifier.fromNamespaceAndPath("packetdelay", "packet-delay-text-layer"), (guiGraphics, deltaTicks) -> {
-            if (isDelayingPackets()) {
-                guiGraphics.drawString(Minecraft.getInstance().font, "Delaying Packets", 4, guiGraphics.guiWidth() - 4 - Minecraft.getInstance().font.lineHeight, 0xffffffff, false);
-            }
-        });
+        HudElementRegistry.attachElementBefore(
+                VanillaHudElements.CHAT,
+                Identifier.fromNamespaceAndPath("packetdelay", "text_overlay"),
+                (guiGraphics, deltaTracker) -> {
+                    if (isDelayingPackets()) {
+                        guiGraphics.text(Minecraft.getInstance().font, "Delaying Packets", 4, guiGraphics.guiHeight() - 4 - Minecraft.getInstance().font.lineHeight, 0xFFFFFFFF);
+                    }
+                }
+        );
     }
 
     private static final ArrayList<Packet<?>> delayedPackets = new ArrayList<>();
